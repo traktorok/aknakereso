@@ -118,8 +118,6 @@ namespace aknakereso
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.Clear();
                 Console.WriteLine("Rossz");
-                Console.WriteLine($"{board[4, 5].revealed}");
-                Console.WriteLine($"{board[4, 5].value}");
                 Console.ReadKey();
                 return -1;
             }
