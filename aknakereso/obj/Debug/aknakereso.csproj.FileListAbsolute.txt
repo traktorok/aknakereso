@@ -1,0 +1,7 @@
+C:\Users\arongeo\Desktop\aknakereso\aknakereso\obj\Debug\aknakereso.csproj.AssemblyReference.cache
+C:\Users\arongeo\Desktop\aknakereso\aknakereso\obj\Debug\aknakereso.csproj.CoreCompileInputs.cache
+C:\Users\arongeo\Desktop\aknakereso\aknakereso\bin\Debug\aknakereso.exe.config
+C:\Users\arongeo\Desktop\aknakereso\aknakereso\bin\Debug\aknakereso.exe
+C:\Users\arongeo\Desktop\aknakereso\aknakereso\bin\Debug\aknakereso.pdb
+C:\Users\arongeo\Desktop\aknakereso\aknakereso\obj\Debug\aknakereso.exe
+C:\Users\arongeo\Desktop\aknakereso\aknakereso\obj\Debug\aknakereso.pdb
