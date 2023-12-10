@@ -10,7 +10,7 @@ namespace aknakereso
     {
         static void Main(string[] args)
         {
-            AknakeresoGame game = new AknakeresoGame(10, 10);
+            AknakeresoGame game = new AknakeresoGame(10, 10, 1);
             bool shouldQuit = false;
 
             while (shouldQuit == false)
@@ -31,9 +31,6 @@ namespace aknakereso
                         break;
                     case ConsoleKey.Escape:
                         shouldQuit = true;
-                        break;
-                    case ConsoleKey.Home:
-                        game.addAkna();
                         break;
                     case ConsoleKey.Spacebar:
                     case ConsoleKey.Enter:

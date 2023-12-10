@@ -32,24 +32,14 @@ namespace aknakereso
 
         private const int AKNA = 10;
 
-        public AknakeresoGame(int boardWidth, int boardHeight)
+        private bool CheckCoordInBounds(int x, int y)
         {
-            curPos.x = 0;
-            curPos.y = 0;
-            boardSize.x = boardWidth;
-            boardSize.y = boardHeight;
-            board = new Square[boardHeight, boardWidth];
-            board[0, 1].value = 10;
-            Console.CursorVisible = false;
-        }
-
-        private bool CheckCoordInBounds(Coordinate coord) {
-            if (0 > coord.x || boardSize.x < coord.x)
+            if (0 > x || boardSize.x <= x)
             {
                 return false;
             }
 
-            if (0 > coord.y || boardSize.y < coord.y)
+            if (0 > y || boardSize.y <= y)
             {
                 return false;
             }
@@ -57,19 +47,19 @@ namespace aknakereso
             return true;
         }
 
-        public void PlaceAkna(Coordinate coord)
+        public void PlaceAkna(int x, int y)
         {
-            board[coord.y, coord.x].value = AKNA;
-            for (int i = coord.y - 1; i < coord.y + 1; i++)
+            board[y, x].value = AKNA;
+            for (int i = y - 1; i <= y + 1; i++)
             {
-                for (int j = coord.x - 1; j < coord.x + 1; j++)
+                for (int j = x - 1; j <= x + 1; j++)
                 {
-                    if (!CheckCoordInBounds(new Coordinate(j, i)))
+                    if (!CheckCoordInBounds(j, i))
                     {
                         continue;
                     }
 
-                    if (board[i, j].value != AKNA && !(i == coord.y && j == coord.x))
+                    if (board[i, j].value != AKNA && !(i == y && j == x))
                     {
                         board[i, j].value++;
                     }
@@ -77,39 +67,124 @@ namespace aknakereso
             }
         }
 
-        public int MoveCursor(int x, int y)
+        private void GenerateAknak(int aknakSzama)
         {
-            if (0 > (curPos.x + x) || boardSize.x < (curPos.x + x))
+            Random rnd = new Random();
+
+            int x, y;
+            int i = 0;
+            while (i <= aknakSzama)
             {
-                return -1;
-            }
+                x = rnd.Next(0, boardSize.x);
+                y = rnd.Next(0, boardSize.y);
 
-            if (0 > (curPos.y + y) || boardSize.y < (curPos.y + y))
+                if (board[y, x].value != 10)
+                {
+                    PlaceAkna(x, y);
+                    i++;
+                }
+            }
+        }
+
+        public void WriteSquare(int x, int y)
+        {
+            if (!CheckCoordInBounds(x, y))
+                return;
+
+            if (board[y, x].revealed == false)
             {
-                return -1;
+                Console.Write('#');
             }
+            else
+            {
+                if (board[y, x].value == 10)
+                {
+                    Console.Write('*');
+                }
+                else if (board[y, x].value == 0)
+                {
+                    Console.Write(' ');
+                }
+                else if (board[y, x].value < 10)
+                {
+                    Console.Write(board[y, x].value.ToString());
+                }
+            }
+        }
 
-            Console.SetCursorPosition(curPos.x, curPos.y);
-            Console.Write(' ');
+        public void RenderBoard()
+        {
+            Console.SetCursorPosition(0, 0);
 
-            curPos.x += x;
-            curPos.y += y;
+            curPos.x = 0;
+            curPos.y = 0;
 
+            for (int y = 0; y < boardSize.y; y++)
+            {
+                for (int x = 0; x < boardSize.x; x++)
+                {
+                    WriteSquare(x, y);
+                }
+                Console.Write('\n');
+            }
+        }
+
+        public AknakeresoGame(int boardWidth, int boardHeight, int difficulty)
+        {
+            curPos.x = 0;
+            curPos.y = 0;
+            boardSize.x = boardWidth;
+            boardSize.y = boardHeight;
+            board = new Square[boardHeight, boardWidth];
+            Console.CursorVisible = false;
+
+            GenerateAknak(5);
+
+            RenderBoard();
+        }
+        
+        private void RenderCurrSor()
+        {
+            for (int i = 0; i < boardSize.x; i++)
+            {
+                Console.SetCursorPosition(i, curPos.y);
+                WriteSquare(i, curPos.y);
+            }
+            
             Console.SetCursorPosition(curPos.x, curPos.y);
 
             Console.BackgroundColor = ConsoleColor.Blue;
-            Console.Write(' ');
+            WriteSquare(curPos.x, curPos.y);
             Console.BackgroundColor = ConsoleColor.Black;
+        }
+
+        public int MoveCursor(int x, int y)
+        {
+            RenderCurrSor();
+
+            // Csak akkor valtoztatjuk a kurzort, ha az
+            // a tabla teruleten belul van
+            if (CheckCoordInBounds(x + curPos.x, y + curPos.y))
+            {
+                Console.SetCursorPosition(curPos.x, curPos.y);
+                WriteSquare(curPos.x, curPos.y);
+
+                curPos.x += x;
+                curPos.y += y;
+
+                Console.SetCursorPosition(curPos.x, curPos.y);
+
+                Console.BackgroundColor = ConsoleColor.Blue;
+                WriteSquare(curPos.x, curPos.y);
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
 
             return 0;
         }
 
-        public void addAkna() {
-            PlaceAkna(curPos);
-        }
-
         public int RevealCurPos()
         {
+
             Square currSquare;
             currSquare = board[curPos.y, curPos.x];
 
@@ -121,6 +196,9 @@ namespace aknakereso
                 Console.ReadKey();
                 return -1;
             }
+
+            board[curPos.y, curPos.x].revealed = true;
+            RenderCurrSor();
 
             return 0;
         }
