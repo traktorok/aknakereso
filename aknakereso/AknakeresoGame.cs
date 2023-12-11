@@ -72,7 +72,7 @@ namespace aknakereso
         /// </summary>
         /// <param name="x">Az X koordinata</param>
         /// <param name="y">Az Y koordinata</param>
-        public void WriteMezo(int x, int y)
+        private void WriteMezo(int x, int y)
         {
             if (!CheckCoordInBounds(x, y))
                 return;
@@ -101,7 +101,7 @@ namespace aknakereso
         /// <summary>
         /// Letorli a konzolt, majd ujrarajzolja a teljes tablat.
         /// </summary>
-        public void RenderTabla()
+        private void RenderTabla()
         {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
@@ -264,7 +264,7 @@ namespace aknakereso
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void PlaceAkna(int x, int y)
+        private void PlaceAkna(int x, int y)
         {
             tabla[y, x].value = AKNA;
             for (int i = y - 1; i <= y + 1; i++)
