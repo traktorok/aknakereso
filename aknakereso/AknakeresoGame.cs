@@ -30,6 +30,8 @@ namespace aknakereso
         private Coordinate boardSize;
         private Square[,] board;
 
+        private bool elsoReveal = true;
+
         private const int AKNA = 10;
 
         /// <summary>
@@ -74,7 +76,7 @@ namespace aknakereso
             }
         }
 
-        private void GenerateAknak(int aknakSzama)
+        private void GenerateAknak(int aknakSzama, int startPosX, int startPosY)
         {
             Random rnd = new Random();
 
@@ -85,7 +87,13 @@ namespace aknakereso
                 x = rnd.Next(0, boardSize.x);
                 y = rnd.Next(0, boardSize.y);
 
-                if (board[y, x].value != 10)
+                if (startPosX == x && startPosY == y)
+                {
+                    i++;
+                    continue;
+                }
+
+                if (board[y, x].value != AKNA)
                 {
                     PlaceAkna(x, y);
                     i++;
@@ -145,8 +153,6 @@ namespace aknakereso
             board = new Square[boardHeight, boardWidth];
             Console.CursorVisible = false;
 
-            GenerateAknak(2);
-
             RenderBoard();
         }
         
@@ -194,7 +200,7 @@ namespace aknakereso
             bool didWin = true;
             for (int x = 0; x < boardSize.x; x++)
             {
-                for (int y = 0; y < boardSize.x; y++)
+                for (int y = 0; y < boardSize.y; y++)
                 {
                     if (board[y, x].value != AKNA && board[y, x].revealed == false)
                     {
@@ -208,11 +214,18 @@ namespace aknakereso
 
         public int RevealCurPos()
         {
-
             Square currSquare;
             currSquare = board[curPos.y, curPos.x];
 
-            if (currSquare.value == 10 && currSquare.revealed == false)
+            // Az aknageneralas az elso mezo kivalasztasakor tortenik,
+            // hogy biztosak legyunk abban, hogy azon nincs akna.
+            if (elsoReveal == true)
+            {
+                GenerateAknak(10, curPos.x, curPos.y);
+                elsoReveal = false;
+            }
+
+            if (currSquare.value == AKNA && currSquare.revealed == false)
             {
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.Clear();
@@ -222,6 +235,8 @@ namespace aknakereso
             }
 
             board[curPos.y, curPos.x].revealed = true;
+            // Azert az egesz sort rendereljuk ujra, mivel
+            // a ReadKey felulirhat karaktereket a sorban.
             RenderCurrSor();
 
             if (CheckWin())
