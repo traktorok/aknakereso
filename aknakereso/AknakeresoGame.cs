@@ -38,6 +38,11 @@ namespace aknakereso
         // A jatektabla
         private Mezo[,] tabla;
 
+        // Az aknak maximalis szama a tablan.
+        // Lehet kisebb, ha a tabla mezoinek
+        // szamaval megegyezik.
+        private int maxAknaSzam;
+
         // Ez az elso felfedes?
         private bool elsoReveal = true;
 
@@ -125,8 +130,8 @@ namespace aknakereso
         /// </summary>
         /// <param name="tablaWidth">A tabla szelessege</param>
         /// <param name="tablaHeight">A tabla magassaga</param>
-        /// <param name="difficulty">A nehezseg (az aknak szamat befolyasolja)</param>
-        public AknakeresoGame(int tablaWidth, int tablaHeight, int difficulty)
+        /// <param name="aknaSzam">A tablan levo aknak maximum szama.</param>
+        public AknakeresoGame(int tablaWidth, int tablaHeight, int aknaSzam)
         {
             curPos = new Coordinate();
             tablaSize = new Coordinate();
@@ -136,8 +141,10 @@ namespace aknakereso
             curPos.y = 0;
             tablaSize.x = tablaWidth;
             tablaSize.y = tablaHeight;
-            
+            maxAknaSzam = aknaSzam;
+
             Console.CursorVisible = false;
+            Console.SetWindowSize(tablaWidth + 1, tablaHeight + 1); // + 1-ek ReadKey bufferzonenak
 
             RenderTabla();
         }
@@ -329,7 +336,7 @@ namespace aknakereso
             // hogy biztosak legyunk abban, hogy azon nincs akna.
             if (elsoReveal == true)
             {
-                GenerateAknak(8, curPos.x, curPos.y);
+                GenerateAknak(maxAknaSzam, curPos.x, curPos.y);
                 elsoReveal = false;
             }
 
@@ -344,10 +351,6 @@ namespace aknakereso
 
             if (currMezo.value == AKNA && currMezo.revealed == false)
             {
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.Clear();
-                Console.WriteLine("Rossz");
-                Console.ReadKey();
                 return -1;
             }
 
@@ -358,11 +361,7 @@ namespace aknakereso
 
             if (CheckWin())
             {
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.Clear();
-                Console.WriteLine("Nyertel");
-                Console.ReadKey();
-                return -1;
+                return 1;
             }
 
             return 0;
