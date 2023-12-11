@@ -240,11 +240,6 @@ namespace aknakereso
                         {
                             for (int j = x - 1; j <= x + 1; j++)
                             {
-                                if (!CheckCoordInBounds(j, i))
-                                {
-                                    continue;
-                                }
-
                                 // Sajat koordinatain ne hivja ujra,
                                 // hiszen az egy orok loop.
                                 if (!(i == y && j == x))
