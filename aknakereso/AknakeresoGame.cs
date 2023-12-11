@@ -73,7 +73,7 @@ namespace aknakereso
 
             int x, y;
             int i = 0;
-            while (i <= aknakSzama)
+            while (i < aknakSzama)
             {
                 x = rnd.Next(0, boardSize.x);
                 y = rnd.Next(0, boardSize.y);
@@ -138,7 +138,7 @@ namespace aknakereso
             board = new Square[boardHeight, boardWidth];
             Console.CursorVisible = false;
 
-            GenerateAknak(5);
+            GenerateAknak(2);
 
             RenderBoard();
         }
@@ -182,6 +182,23 @@ namespace aknakereso
             return 0;
         }
 
+        public bool CheckWin()
+        {
+            bool didWin = true;
+            for (int x = 0; x < boardSize.x; x++)
+            {
+                for (int y = 0; y < boardSize.x; y++)
+                {
+                    if (board[y, x].value != AKNA && board[y, x].revealed == false)
+                    {
+                        didWin = false;
+                    }
+                }
+            }
+
+            return didWin;
+        }
+
         public int RevealCurPos()
         {
 
@@ -199,6 +216,15 @@ namespace aknakereso
 
             board[curPos.y, curPos.x].revealed = true;
             RenderCurrSor();
+
+            if (CheckWin())
+            {
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.Clear();
+                Console.WriteLine("Nyertel");
+                Console.ReadKey();
+                return -1;
+            }
 
             return 0;
         }
