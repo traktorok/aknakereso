@@ -32,6 +32,13 @@ namespace aknakereso
 
         private const int AKNA = 10;
 
+        /// <summary>
+        /// Megnezi, hogy az x es y koordinata a 
+        /// jatektablan belul tartozkodik-e.
+        /// </summary>
+        /// <param name="x">X koordinata, amit meg kell neznunk</param>
+        /// <param name="y">Y koordinata, amit meg kell neznunk</param>
+        /// <returns></returns>
         private bool CheckCoordInBounds(int x, int y)
         {
             if (0 > x || boardSize.x <= x)
