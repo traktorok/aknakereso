@@ -42,7 +42,7 @@ namespace aknakereso
         /// <summary>
         /// Keszit egy AknakeresoGame peldanyt, majd a konzolrol bemeneteket kezel,
         /// es ez alapjan iranyitja az AknakeresoGame-et. A jatek kimenetelet figyelembe
-        /// veve elinditja a Nyertel, vagy a Vesztettel eljarasokat.
+        /// veve elinditja a Nyert, vagy a Vesztett eljarasokat.
         /// </summary>
         /// <param name="tablaSzelesseg">A jatektabla szelessege (karakterekben)</param>
         /// <param name="tablaMagassag">A jatektabla magassaga (karakterekben)</param>
