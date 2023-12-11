@@ -29,12 +29,19 @@ namespace aknakereso
 
     class AknakeresoGame
     {
-        private Coordinate curPos = new Coordinate();
-        private Coordinate tablaSize = new Coordinate();
+        // A kurzor jelenlegi koordinatai.
+        private Coordinate curPos;
+
+        // A jatektabla merete
+        private Coordinate tablaSize;
+
+        // A jatektabla
         private Mezo[,] tabla;
 
+        // Ez az elso felfedes?
         private bool elsoReveal = true;
 
+        // Az AKNA ertek a 10
         private const int AKNA = 10;
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace aknakereso
             }
             else
             {
-                if (tabla[y, x].value == 10)
+                if (tabla[y, x].value == AKNA)
                 {
                     Console.Write('*');
                 }
@@ -84,7 +91,7 @@ namespace aknakereso
                 {
                     Console.Write(' ');
                 }
-                else if (tabla[y, x].value < 10)
+                else if (tabla[y, x].value < AKNA)
                 {
                     Console.Write(tabla[y, x].value.ToString());
                 }
@@ -121,11 +128,15 @@ namespace aknakereso
         /// <param name="difficulty">A nehezseg (az aknak szamat befolyasolja)</param>
         public AknakeresoGame(int tablaWidth, int tablaHeight, int difficulty)
         {
+            curPos = new Coordinate();
+            tablaSize = new Coordinate();
+            tabla = new Mezo[tablaHeight, tablaWidth];
+
             curPos.x = 0;
             curPos.y = 0;
             tablaSize.x = tablaWidth;
             tablaSize.y = tablaHeight;
-            tabla = new Mezo[tablaHeight, tablaWidth];
+            
             Console.CursorVisible = false;
 
             RenderTabla();
