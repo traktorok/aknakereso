@@ -12,3 +12,10 @@ C:\Users\ga_szoft2006\Desktop\aknakereso\aknakereso\aknakereso\obj\Debug\aknaker
 C:\Users\ga_szoft2006\Desktop\aknakereso\aknakereso\aknakereso\obj\Debug\aknakereso.csproj.CoreCompileInputs.cache
 C:\Users\ga_szoft2006\Desktop\aknakereso\aknakereso\aknakereso\obj\Debug\aknakereso.exe
 C:\Users\ga_szoft2006\Desktop\aknakereso\aknakereso\aknakereso\obj\Debug\aknakereso.pdb
+C:\Users\dm_szoft2006\Desktop\asd\aknakereso\aknakereso\bin\Debug\aknakereso.exe.config
+C:\Users\dm_szoft2006\Desktop\asd\aknakereso\aknakereso\bin\Debug\aknakereso.exe
+C:\Users\dm_szoft2006\Desktop\asd\aknakereso\aknakereso\bin\Debug\aknakereso.pdb
+C:\Users\dm_szoft2006\Desktop\asd\aknakereso\aknakereso\obj\Debug\aknakereso.csproj.AssemblyReference.cache
+C:\Users\dm_szoft2006\Desktop\asd\aknakereso\aknakereso\obj\Debug\aknakereso.csproj.CoreCompileInputs.cache
+C:\Users\dm_szoft2006\Desktop\asd\aknakereso\aknakereso\obj\Debug\aknakereso.exe
+C:\Users\dm_szoft2006\Desktop\asd\aknakereso\aknakereso\obj\Debug\aknakereso.pdb

@@ -8,6 +8,12 @@ namespace aknakereso
 {
     class Program
     {
+        static void AknaMenu()
+        {
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.Clear();
+
+        }
 
         /// <summary>
         /// Megvaltoztatja a konzol hatterszinet pirosra, es
