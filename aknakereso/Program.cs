@@ -81,8 +81,8 @@ namespace aknakereso
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
 
-            Console.WriteLine("  A szélesség maximum 100 lehet, a magasság maximum 25 lehet.");
-            Console.WriteLine("  A maximum aknák száma a szélesség * magsság.\n");
+            Console.WriteLine("  A szélesség maximum 100 lehet, a magasság maximum 25.");
+            Console.WriteLine("  A maximum aknák száma a szélesség * magasság.\n");
 
             Console.Write("  Szélesség: ");
             while (!int.TryParse(Console.ReadLine(), out szelesseg) || szelesseg > 100 || szelesseg <= 0) {
