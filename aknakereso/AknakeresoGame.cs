@@ -145,6 +145,9 @@ namespace aknakereso
 
             Console.CursorVisible = false;
             Console.SetWindowSize(tablaWidth + 1, tablaHeight + 1); // + 1-ek ReadKey bufferzonenak
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Clear();
 
             RenderTabla();
         }
